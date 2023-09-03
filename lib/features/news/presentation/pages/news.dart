@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:news_app/features/news/presentation/bloc/article/remote/remote_article_bloc.dart';
-import 'package:news_app/features/news/presentation/widgets/filter_container.dart';
 
 import '../widgets/article_tile.dart';
+import '../widgets/categories.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
@@ -26,19 +26,14 @@ class _NewsPageState extends State<NewsPage> {
       appBar: _buildAppBar(),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
-        child: _buildBody(context),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (ctx) => _showFilterBox(),
-            barrierDismissible: false,
-          );
-        },
-        tooltip: 'Filter News',
-        child: const Icon(Icons.filter_alt),
+        child: Column(
+          children: [
+            Categories(),
+            Expanded(
+              child: _buildBody(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -86,18 +81,6 @@ class _NewsPageState extends State<NewsPage> {
         }
         return const SizedBox.shrink();
       },
-    );
-  }
-
-  AlertDialog _showFilterBox() {
-    return AlertDialog(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
-      content: FilterContainer(),
     );
   }
 }

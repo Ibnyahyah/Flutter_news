@@ -5,5 +5,6 @@ abstract class RemoteArticleEvent {
 }
 
 class GetArticlesEvent extends RemoteArticleEvent {
-  GetArticlesEvent();
+  final String category;
+  GetArticlesEvent({this.category = "general"});
 }
