@@ -29,18 +29,21 @@ class NewsDetail extends StatelessWidget {
               ),
             ),
           ),
-          CachedNetworkImage(
-            imageUrl:
-                article.urlToImage ?? "http://via.placeholder.com/350x150",
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.width / 1.2,
-            width: double.infinity,
-            progressIndicatorBuilder: (context, url, downloadProgress) {
-              return const CupertinoActivityIndicator();
-            },
-            errorWidget: (context, url, error) {
-              return const Icon(Icons.error);
-            },
+          Hero(
+            tag: article.urlToImage ?? '1',
+            child: CachedNetworkImage(
+              imageUrl:
+                  article.urlToImage ?? "http://via.placeholder.com/350x150",
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.width / 1.2,
+              width: double.infinity,
+              progressIndicatorBuilder: (context, url, downloadProgress) {
+                return const CupertinoActivityIndicator();
+              },
+              errorWidget: (context, url, error) {
+                return const Icon(Icons.error);
+              },
+            ),
           ),
           Container(
             width: double.infinity,

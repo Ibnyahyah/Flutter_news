@@ -73,25 +73,30 @@ class ArticleTile extends StatelessWidget {
     );
   }
 
-  Container _buildImage(context) {
-    return Container(
-      height: double.maxFinite,
-      width: MediaQuery.of(context).size.width / 3,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: CachedNetworkImage(
-          imageUrl: article.urlToImage ?? "http://via.placeholder.com/350x150",
-          fit: BoxFit.cover,
-          progressIndicatorBuilder: (context, url, downloadProgress) {
-            return const CupertinoActivityIndicator();
-          },
-          errorWidget: (context, url, error) {
-            return const Icon(Icons.error);
-          },
+  Widget _buildImage(context) {
+    return Hero(
+      tag: article.urlToImage ?? '1',
+      transitionOnUserGestures: true,
+      child: Container(
+        height: double.maxFinite,
+        width: MediaQuery.of(context).size.width / 3,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: CachedNetworkImage(
+            imageUrl:
+                article.urlToImage ?? "http://via.placeholder.com/350x150",
+            fit: BoxFit.cover,
+            progressIndicatorBuilder: (context, url, downloadProgress) {
+              return const CupertinoActivityIndicator();
+            },
+            errorWidget: (context, url, error) {
+              return const Icon(Icons.error);
+            },
+          ),
         ),
       ),
     );
